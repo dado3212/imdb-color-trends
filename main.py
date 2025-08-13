@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS imdb_tech (
 )
 """)
 
-num_cap = 1000 # Max number of movies per year, sorted by number of votes
+num_cap = 500 # Max number of movies per year, sorted by number of votes
 
 # All movies meeting the threshold, with year/title/rating/votes
 df = con.execute(f"""
