@@ -1,0 +1,4 @@
+.DS_Store
+imdb_cache.duckdb
+title.basics.tsv
+title.ratings.tsv
