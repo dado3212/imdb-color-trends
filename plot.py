@@ -4,6 +4,8 @@ import ast
 
 df = pd.read_csv("imdb_top_per_year_with_colors.csv")
 df["colors"] = df["colors_json"].apply(ast.literal_eval)
+# Only movies with color info (newer 2025 movies can be lacking)
+df = df[df["colors"].apply(bool)]
 
 df["is_bw"] = df["colors"].apply(lambda c: any("Black and White" in x for x in c))
 df["is_color"] = df["colors"].apply(lambda c: any("Color" in x for x in c))
