@@ -33,6 +33,8 @@ CREATE TABLE IF NOT EXISTS imdb_tech (
 )
 """)
 
+num_cap = 1000 # Max number of movies per year, sorted by number of votes
+
 # All movies meeting the threshold, with year/title/rating/votes
 df = con.execute(f"""
   SELECT
@@ -49,7 +51,7 @@ df = con.execute(f"""
     ON r.tconst = b.tconst
   WHERE b.titleType = 'movie'
     AND b.startYear != '\\N'
-  QUALIFY rn <= 100
+  QUALIFY rn <= {num_cap}
   ORDER BY year, r.numVotes DESC
 """).df()
 
@@ -68,7 +70,7 @@ def handle_sigint(sig, frame):
       SELECT year, primaryTitle, tconst, numVotes, colors_json
       FROM imdb_tech
       ORDER BY year, numVotes DESC
-    ) TO 'imdb_top100_per_year_with_colors.csv' (HEADER, DELIMITER ',')
+    ) TO 'imdb_top_per_year_with_colors.csv' (HEADER, DELIMITER ',')
     """)
     sys.exit(0)
 
@@ -96,6 +98,6 @@ COPY (
   SELECT year, primaryTitle, tconst, numVotes, colors_json
   FROM imdb_tech
   ORDER BY year, numVotes DESC
-) TO 'imdb_top100_per_year_with_colors.csv' (HEADER, DELIMITER ',')
+) TO 'imdb_top_per_year_with_colors.csv' (HEADER, DELIMITER ',')
 """)
-print("Wrote imdb_top100_per_year_with_colors.csv")
+print("Wrote imdb_top_per_year_with_colors.csv")
