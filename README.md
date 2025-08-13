@@ -1,5 +1,9 @@
 # Movie Color Trends
 
+Attempts to create a public data set that gets at the data from https://stephenfollows.com/p/when-did-colour-films-eclipse-black-and-white-films.
+
+<img src="/coloration.png?raw=true" height="500px" alt="Graph showing the proportion of movies in color over time"/>
+
 ## Installation
 ```
 python3 -m venv venv
