@@ -20,6 +20,11 @@ plt.xlabel("Year")
 plt.ylabel("Proportion of Top Movies")
 plt.legend()
 plt.grid(True, alpha=0.3)
-plt.tight_layout()
+plt.tight_layout(rect=[0,0.05,1,1])
+plt.subplots_adjust(left=0.06, right=0.99, bottom=0.13)
+plt.figtext(0.99, 0.01,
+            "* 'Top' movies are defined as (up to) the 1000 most popular movies from that year, according to IMDb votes as of Aug 12, 2025",
+            ha="right", va="bottom",
+            fontsize=9, color="gray")
 plt.savefig("coloration.png", dpi=300)
 plt.show()
